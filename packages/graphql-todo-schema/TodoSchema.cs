@@ -1,6 +1,6 @@
 ﻿namespace GraphQL.Todo.Schema;
 
-public class TodoSchema : Types.Schema
+public class TodoSchema : GraphQL.Types.Schema
 {
     public TodoSchema(IServiceProvider provider) : base(provider)
     {
