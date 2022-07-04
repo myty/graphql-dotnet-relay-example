@@ -24,7 +24,7 @@ internal static class LoggerExtensions
         LoggerMessage.Define<string>(
             LogLevel.Error,
             new EventId(1, nameof(UnhandledException)),
-            "{Error} occurred"
+            "Error occurred: {Error}"
         );
 
     public static void UnhandledException(this ILogger logger, string message)
