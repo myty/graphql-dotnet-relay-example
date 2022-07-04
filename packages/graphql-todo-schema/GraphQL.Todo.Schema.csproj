@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>GraphQL.Todo.Schema</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL" Version="5.3.2" />
+    <PackageReference Include="GraphQL.MicrosoftDI" Version="5.3.2" />
+    <PackageReference Include="GraphQL.Relay" Version="0.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\graphql-todo-core\GraphQL.Todo.Core.csproj" />
+    <ProjectReference Include="..\graphql-todo-services\GraphQL.Todo.Services.csproj" />
+  </ItemGroup>
+
+</Project>
