@@ -16,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<UserTodoConnectionResolver>();
+builder.Services.AddScoped<UserTodoTotalCountResolver>();
 
 builder.Services.AddTransient(typeof(ConnectionType<>));
 builder.Services.AddTransient(typeof(EdgeType<>));

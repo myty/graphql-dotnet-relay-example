@@ -1,5 +1,4 @@
 using GraphQL.MicrosoftDI;
-using GraphQL.Relay.Types;
 using GraphQL.Todo.Core.Interfaces;
 using GraphQL.Todo.Core.Models;
 using GraphQL.Todo.Schema.Extensions;
@@ -10,7 +9,7 @@ using Models = GraphQL.Todo.Core.Models;
 
 namespace GraphQL.Todo.Schema.Types;
 
-public class UserGraphType : NodeGraphType<User>
+public class UserGraphType : ScopedNodeGraphType<User>
 {
     public UserGraphType()
     {
@@ -29,10 +28,7 @@ public class UserGraphType : NodeGraphType<User>
 
         Field<IntGraphType>()
             .Name("totalCount")
-            .Resolve()
-            .WithScope()
-            .WithService<ITodoService>()
-            .Resolve((ctx, todoService) => todoService.FindAll(ctx.Source.Id).Count());
+            .WithScopedResolver<UserTodoTotalCountResolver, User, int>();
 
         Field<IntGraphType>()
             .Name("completedCount")
@@ -42,10 +38,12 @@ public class UserGraphType : NodeGraphType<User>
             .Resolve((ctx, todoService) => todoService.FindAll(ctx.Source.Id, "completed").Count());
     }
 
-    public override User GetById(IResolveFieldContext<object> context, string id)
+    public override User GetByIdScoped(
+        IServiceProvider services,
+        IResolveFieldContext<object> context,
+        string id
+    )
     {
-        using var scope = context.RequestServices.CreateScope();
-        var services = scope.ServiceProvider;
         return services.GetRequiredService<IUserService>().Find(id);
     }
 }

@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\graphql-extensions\GraphQL.Extensions.csproj" />
     <ProjectReference Include="..\graphql-todo-core\GraphQL.Todo.Core.csproj" />
     <ProjectReference Include="..\graphql-todo-services\GraphQL.Todo.Services.csproj" />
   </ItemGroup>
