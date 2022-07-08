@@ -21,6 +21,11 @@ public class TodoGraphType : ScopedNodeGraphType<Models.Todo>
         string id
     )
     {
-        return services.GetRequiredService<ITodoService>().Find(id);
+        if (!Guid.TryParse(id, out Guid todoId))
+        {
+            throw new Exception("Not a valid todo id type");
+        }
+
+        return services.GetRequiredService<ITodoService>().Find(todoId);
     }
 }

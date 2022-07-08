@@ -1,41 +1,27 @@
 using GraphQL.Todo.Core.Interfaces;
+using GraphQL.Todo.Core.Models;
 
 namespace GraphQL.Todo.Services.Services
 {
     public class TodoService : ITodoService
     {
-        private static Core.Models.Todo TodoFactory(bool completed = false)
-        {
-            var id = Guid.NewGuid().ToString("N");
+        private readonly TodoContext _context;
 
-            return new Core.Models.Todo
-            {
-                Id = id,
-                Text = $"This is a test, Id={id}",
-                Completed = completed
-            };
+        public TodoService(TodoContext context)
+        {
+            this._context = context;
         }
 
-        public Core.Models.Todo Find(string id)
+        public Core.Models.Todo Find(Guid id)
         {
-            return TodoFactory();
+            return _context.Todos.Find(id);
         }
 
-        public IQueryable<Core.Models.Todo> FindAll(string userId, string status = null)
+        public IQueryable<Core.Models.Todo> FindAll(Guid userId, string status = null)
         {
-            var queryable = new Core.Models.Todo[]
-            {
-                TodoFactory(),
-                TodoFactory(),
-                TodoFactory(true)
-            }.AsQueryable();
+            var queryable = _context.Todos.Where(todo => todo.UserId == userId);
 
-            if (status != "completed")
-            {
-                return queryable;
-            }
-
-            return queryable.Where(todo => todo.Completed);
+            return status != "completed" ? queryable : queryable.Where(todo => todo.Completed);
         }
     }
 }

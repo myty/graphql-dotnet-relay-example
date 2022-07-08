@@ -18,6 +18,6 @@ public class TodoQuery : QueryGraphType
             .Resolve()
             .WithScope()
             .WithService<IUserService>()
-            .Resolve((ctx, userService) => userService.Find(ctx.GetArgument<string>("id")));
+            .Resolve((ctx, userService) => userService.Find(ctx.GetArgument<Guid>("id")));
     }
 }

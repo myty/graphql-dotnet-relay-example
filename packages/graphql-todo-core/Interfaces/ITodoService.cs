@@ -2,7 +2,7 @@ namespace GraphQL.Todo.Core.Interfaces
 {
     public interface ITodoService
     {
-        Models.Todo Find(string id);
-        IQueryable<Models.Todo> FindAll(string userId, string status = null);
+        Models.Todo Find(Guid id);
+        IQueryable<Models.Todo> FindAll(Guid userId, string status = null);
     }
 }

@@ -4,6 +4,6 @@ namespace GraphQL.Todo.Core.Interfaces
 {
     public interface IUserService
     {
-        User Find(string id);
+        User Find(Guid id);
     }
 }

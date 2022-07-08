@@ -44,6 +44,11 @@ public class UserGraphType : ScopedNodeGraphType<User>
         string id
     )
     {
-        return services.GetRequiredService<IUserService>().Find(id);
+        if (!Guid.TryParse(id, out Guid userId))
+        {
+            throw new Exception("Not a valid user id type");
+        }
+
+        return services.GetRequiredService<IUserService>().Find(userId);
     }
 }

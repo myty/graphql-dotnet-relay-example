@@ -8,11 +8,13 @@ using GraphQL.SystemTextJson;
 using GraphQL.Todo.Core.Interfaces;
 using GraphQL.Todo.Schema;
 using GraphQL.Todo.Schema.ScopedResolvers;
+using GraphQL.Todo.Services;
 using GraphQL.Todo.Services.Services;
 using GraphQL.Types.Relay;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<TodoContext>();
 builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<UserTodoConnectionResolver>();
