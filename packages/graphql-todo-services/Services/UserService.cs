@@ -16,5 +16,10 @@ namespace GraphQL.Todo.Services.Services
         {
             return _context.Users.Find(id);
         }
+
+        public IQueryable<User> FindAll()
+        {
+            return _context.Users;
+        }
     }
 }

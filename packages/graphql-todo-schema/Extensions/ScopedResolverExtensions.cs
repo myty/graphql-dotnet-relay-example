@@ -28,4 +28,15 @@ public static class ScopedResolverExtensions
             .WithService<TConnectionResolver>()
             .Resolve((ctx, resolver) => ctx.ToConnection(resolver.Resolve(ctx)));
     }
+
+    public static void WithScopedConnectionResolver<TConnectionResolver, TReturnType>(
+        this ConnectionBuilder<object> builder
+    ) where TConnectionResolver : IScopedConnectionResolver<TReturnType>
+    {
+        builder
+            .Resolve()
+            .WithScope()
+            .WithService<TConnectionResolver>()
+            .Resolve((ctx, resolver) => ctx.ToConnection(resolver.Resolve(ctx)));
+    }
 }

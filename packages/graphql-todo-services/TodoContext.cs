@@ -14,12 +14,15 @@ namespace GraphQL.Todo.Services
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
-            DbPath = System.IO.Path.Join(path, "todo.db");
+            DbPath = Path.Join(path, "todo.db");
         }
 
-        // The following configures EF to create a Sqlite database file in the
-        // special "local" folder for your platform.
         protected override void OnConfiguring(DbContextOptionsBuilder options) =>
             options.UseSqlite($"Data Source={DbPath}");
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Models.User>().HasIndex(b => b.Username).IsUnique();
+        }
     }
 }

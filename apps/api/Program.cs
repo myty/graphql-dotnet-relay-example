@@ -19,6 +19,7 @@ builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<UserTodoConnectionResolver>();
 builder.Services.AddScoped<UserTodoTotalCountResolver>();
+builder.Services.AddScoped<UserConnectionResolver>();
 
 builder.Services.AddTransient(typeof(ConnectionType<>));
 builder.Services.AddTransient(typeof(EdgeType<>));
@@ -50,4 +51,7 @@ app.UseWebSockets();
 app.UseGraphQLWebSockets<TodoSchema>();
 app.UseGraphQL<TodoSchema>();
 app.UseGraphQLAltair();
+
+app.UseDataSeed();
+
 app.Run();

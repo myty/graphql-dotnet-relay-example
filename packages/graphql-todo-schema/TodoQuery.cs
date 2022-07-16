@@ -1,6 +1,9 @@
 using GraphQL.MicrosoftDI;
 using GraphQL.Relay.Types;
 using GraphQL.Todo.Core.Interfaces;
+using GraphQL.Todo.Core.Models;
+using GraphQL.Todo.Schema.Extensions;
+using GraphQL.Todo.Schema.ScopedResolvers;
 using GraphQL.Todo.Schema.Types;
 using GraphQL.Types;
 
@@ -11,6 +14,10 @@ public class TodoQuery : QueryGraphType
     public TodoQuery()
     {
         Name = "Query";
+
+        Connection<UserGraphType>()
+            .Name("users")
+            .WithScopedConnectionResolver<UserConnectionResolver, User>();
 
         Field<UserGraphType>()
             .Name("user")

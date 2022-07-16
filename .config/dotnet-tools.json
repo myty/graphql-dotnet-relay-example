@@ -9,9 +9,15 @@
       ]
     },
     "dotnet-ef": {
-      "version": "6.0.6",
+      "version": "6.0.7",
       "commands": [
         "dotnet-ef"
+      ]
+    },
+    "dotnet-aspnet-codegenerator": {
+      "version": "6.0.7",
+      "commands": [
+        "dotnet-aspnet-codegenerator"
       ]
     }
   }
